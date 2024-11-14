@@ -1,6 +1,6 @@
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import AuthService from "@/services/auth-service";
+// import AuthService from "@/services/auth-service";
 import { useForm } from "react-hook-form";
 import { CardHeader, CardContent, CardTitle, Card, CardFooter } from "@/components/ui/card";
 import { formSchema } from "./schema";
@@ -24,14 +24,14 @@ function SignupForm({ onSuccess = () => {} }: { onSuccess?: () => void }) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     toggleState("isLoading");
-    await AuthService.signup(values.fullname, values.username, values.password, values.email)
-      .then((res) => {
-        console.log(res);
-        onSuccess();
-      })
-      .finally(() => {
-        toggleState("isLoading");
-      });
+    // await AuthService.signup(values.fullname, values.username, values.password, values.email)
+    //   .then((res) => {
+    //     console.log(res);
+    //     onSuccess();
+    //   })
+    //   .finally(() => {
+    //     toggleState("isLoading");
+    //   });
   }
   return (
     <>

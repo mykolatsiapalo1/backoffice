@@ -123,8 +123,11 @@ export default function Home() {
   const [accounts, setAccounts] = useState<Account[]>([]);
 
   const fetchAccounts = async () => {
-    const response = await axiosInstance.get("/api/v1/accounts");
-    setAccounts(response.data);
+    const response = await axiosInstance.post("/requestDepasify", {
+      url: "https://sandbox.depasify.com/api/v1/accounts",
+      method: "GET",
+    });
+    setAccounts(response.data.data);
   };
 
   useEffect(() => {
@@ -134,11 +137,9 @@ export default function Home() {
   return (
     <div className="flex flex-col p-6">
       <DashboardInfoWrapper />
-      <DashboardAccountsTable data={mockAccountsData} />
+      <DashboardAccountsTable data={accounts} />
+      
     </div>
   );
 }
 
-export function DashboardAccounts() {
-  return <div></div>;
-}

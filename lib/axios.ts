@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } 
 import Cookies from "js-cookie";
 
 // Base URL for the API
-const BASE_URL = "https://sandbox.depasify.com/";
+const BASE_URL = "http://localhost:3001/";
 
 // Create an Axios instance for protected routes
 const axiosInstance = axios.create({

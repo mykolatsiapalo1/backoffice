@@ -2,7 +2,7 @@
 
 import { SmallLoader } from "@/components/loader/small-loader";
 import { useBool } from "@/hooks/useBool";
-import authService from "@/services/auth-service";
+// import authService from "@/services/auth-service";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -14,7 +14,8 @@ export default function ConfirmEmail() {
 
   const handleConfirmEmail = async () => {
     if (!token) return;
-    const response = await authService.confirmEmail(token);
+    let response = { status: 200 };
+    // const response = await authService.confirmEmail(token);
     if (response.status === 200) {
       setTimeout(() => {
         changeState("isSuccess", true);

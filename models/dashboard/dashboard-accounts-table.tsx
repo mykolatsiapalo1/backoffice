@@ -9,7 +9,7 @@ export function DashboardAccountsTable({ data }: { data?: Account[] }) {
   const columns: ColumnDef<Account>[] = [
     {
       header: "User",
-      accessorKey: "name",
+      accessorKey: "complete_name",
       cell: ({ row }) => {
         return (
           <div className="flex items-center gap-2">
@@ -60,7 +60,7 @@ export function DashboardAccountsTable({ data }: { data?: Account[] }) {
   ];
 
   return (
-    <SkDiv isLoading={!data?.length}>
+    <SkDiv  isLoading={!data?.length}>
       <DataTable columns={columns} data={data || []} />
     </SkDiv>
   );

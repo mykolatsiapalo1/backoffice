@@ -6,7 +6,9 @@ import SignupForm from "@/models/auth/sign-up-form/sign-up-form";
 import { useBool } from "@/hooks/useBool";
 
 function Signup() {
-  const { changeState, getState } = useBool();
+  const { changeState, getState, toggleState } = useBool();
+  
+  
   return (
     <main className="container flex h-screen max-w-screen-xl items-center justify-center">
       <section className="flex h-full w-96 flex-col items-center justify-center">

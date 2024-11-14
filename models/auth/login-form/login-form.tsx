@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { formSchema } from "./schema";
 import { useBool } from "@/hooks/useBool";
-import AuthService from "@/services/auth-service";
+// import AuthService from "@/services/auth-service";
 import FullScreenLoader from "@/components/loader/full-screen-loader";
 import { useRouter } from "next/navigation";
 
@@ -26,22 +26,11 @@ function LoginForm() {
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     changeState("isLoading", true);
-    AuthService.login(values.username, values.password)
-      .then((response) => {
-        if (response.status === 200) {
-          changeState("isSuccess", true);
-          setTimeout(() => {
-            router.push("/");
-          }, 500);
-        }
-      })
-      .finally(() => {
-        changeState("isLoading", false);
-      });
+   
   }
 
   const handleGoogleLogin = () => {
-    AuthService.googleLogin().then((response) => {});
+    // AuthService.googleLogin().then((response) => {});
   };
   return (
     <>
@@ -95,7 +84,7 @@ function LoginForm() {
             </CardContent>
 
             <CardFooter className="flex flex-col gap-2">
-              <Button type="submit" className="w-full">
+              <Button  type="submit" className="w-full">
                 Sign in
               </Button>
               <span className="text-sm text-gray-500">or</span>
