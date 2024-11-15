@@ -8,24 +8,27 @@ import { useBool } from "@/hooks/useBool";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
-export function BankAccountsTable({ selectedAccount }: { selectedAccount: BankAccount }) {  
-  const [editAlias,setEditAlias] = useState<string[]>([]);
-  const addEditAlias = (id:string) => {
+export function BankAccountsTable({ selectedAccount }: { selectedAccount: BankAccount }) {
+  const [editAlias, setEditAlias] = useState<string[]>([]);
+  const addEditAlias = (id: string) => {
     setEditAlias(editAlias.concat(id));
-  }
-  const removeEditAlias = (id:string) => {
-    setEditAlias(editAlias.filter(aliasId => aliasId !== id));
-  }
+  };
+  const removeEditAlias = (id: string) => {
+    setEditAlias(editAlias.filter((aliasId) => aliasId !== id));
+  };
   const columns: ColumnDef<BankAccountInfo>[] = [
     {
-      header: "Alias",
+      header: "ALIAS",
       accessorKey: "alias",
       cell: ({ row }) => {
         return (
           <div>
             {editAlias.includes(row.original.alias.id) ? (
               <div className="flex items-center">
-                <Input className="w-[160px] text-depa-gray-600 text-sm font-semibold leading-tight border border-gray-300 rounded p-1 mr-2" value={row.original.alias.name} />
+                <Input
+                  className="text-depa-gray-600 mr-2 w-[160px] rounded border border-gray-300 p-1 text-sm font-semibold leading-tight"
+                  value={row.original.alias.name}
+                />
                 <Button variant="ghost" onClick={() => removeEditAlias(row.original.alias.id)}>
                   Save
                 </Button>
@@ -47,11 +50,11 @@ export function BankAccountsTable({ selectedAccount }: { selectedAccount: BankAc
       },
     },
     {
-      header: "Holder",
+      header: "HOLDER",
       accessorKey: "holder",
     },
     {
-      header: "Account Number",
+      header: "ACCOUNT NUMBER",
       accessorKey: "accountNumber",
     },
     {
@@ -59,11 +62,11 @@ export function BankAccountsTable({ selectedAccount }: { selectedAccount: BankAc
       accessorKey: "bic",
     },
     {
-      header: "Kind",
+      header: "KIND",
       accessorKey: "kind",
     },
     {
-      header: "Transactions",
+      header: "TRANSACTIONS",
       accessorKey: "transactions",
       cell: ({ row }) => {
         return <Button variant="link">View payments</Button>;
@@ -72,7 +75,17 @@ export function BankAccountsTable({ selectedAccount }: { selectedAccount: BankAc
   ];
   return (
     <SkDiv isLoading={!selectedAccount?.bankAccountsList?.length}>
-      <DataTable columns={columns} data={selectedAccount?.bankAccountsList || []} />
+      <DataTable
+        columns={columns}
+        data={selectedAccount?.bankAccountsList || []}
+        currPage={1}
+        totalCount={selectedAccount?.bankAccountsList?.length || 0}
+        limit={10}
+        getPrevPage={() => {}}
+        getNextPage={() => {}}
+        isPrevPageDisabled={false}
+        isNextPageDisabled={false}
+      />
     </SkDiv>
   );
 }

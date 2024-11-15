@@ -29,12 +29,14 @@ export function Sidebar() {
           <TagItem.Sign>Wallets</TagItem.Sign>
         </TagItem>
       </Link>
-      <TagItem>
-        <TagItem.Icon>
-          <ChartBarIcon />
+      <Link href="/treasury">
+        <TagItem>
+          <TagItem.Icon>
+            <WalletIcon />
         </TagItem.Icon>
-        <TagItem.Sign>Treasury</TagItem.Sign>
-      </TagItem>
+          <TagItem.Sign>Treasury</TagItem.Sign>
+        </TagItem>
+      </Link>
       <TagItem>
         <TagItem.Icon>
           <ShieldIcon />

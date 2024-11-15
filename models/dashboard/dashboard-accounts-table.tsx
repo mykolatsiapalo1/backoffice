@@ -60,8 +60,18 @@ export function DashboardAccountsTable({ data }: { data?: Account[] }) {
   ];
 
   return (
-    <SkDiv  isLoading={!data?.length}>
-      <DataTable columns={columns} data={data || []} />
+    <SkDiv isLoading={!data?.length}>
+      <DataTable
+        columns={columns}
+        data={data || []}
+        currPage={1}
+        totalCount={data?.length || 0}
+        limit={10}
+        getPrevPage={() => {}}
+        getNextPage={() => {}}
+        isPrevPageDisabled={false}
+        isNextPageDisabled={false}
+      />
     </SkDiv>
   );
 }

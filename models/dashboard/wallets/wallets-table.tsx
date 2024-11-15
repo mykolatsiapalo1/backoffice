@@ -51,7 +51,17 @@ export function WalletsTable({ selectedAccount }: { selectedAccount: WalletAccou
   ];
   return (
     <SkDiv isLoading={!selectedAccount?.wallets?.length}>
-      <DataTable columns={columns} data={selectedAccount?.wallets || []} />
+      <DataTable
+        columns={columns}
+        data={selectedAccount?.wallets || []}
+        currPage={1}
+        totalCount={selectedAccount?.wallets?.length || 0}
+        limit={10}
+        getPrevPage={() => {}}
+        getNextPage={() => {}}
+        isPrevPageDisabled={false}
+        isNextPageDisabled={false}
+      />
     </SkDiv>
   );
 }
