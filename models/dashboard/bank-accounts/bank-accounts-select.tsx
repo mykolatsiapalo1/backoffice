@@ -16,7 +16,7 @@ export function BankAccountsSelect({
   return (
     <SkDiv isLoading={!data?.length}>
       <span className="mb-2 text-base font-normal leading-normal text-primary">Select account</span>
-      <div className="mt-2 mb-4 flex w-[100%] items-center gap-2 text-base">
+      <div className="mt-2 mb-4 flex w-full items-center gap-2 text-base">
         <Select onValueChange={(value) => setSelectedAccountId(value)}>
           <SelectTrigger>
             <SelectValue placeholder={<SelectItemRow {...selectedAccount} />} />

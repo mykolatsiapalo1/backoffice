@@ -6,9 +6,16 @@ import { Button } from "@/components/ui/button";
 import { format, fromUnixTime } from "date-fns";
 import { useBool } from "@/hooks/useBool";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
-export function BankAccountsTable({ selectedAccount }: { selectedAccount: BankAccount }) {
-  const { toggleState, getState } = useBool();
+export function BankAccountsTable({ selectedAccount }: { selectedAccount: BankAccount }) {  
+  const [editAlias,setEditAlias] = useState<string[]>([]);
+  const addEditAlias = (id:string) => {
+    setEditAlias(editAlias.concat(id));
+  }
+  const removeEditAlias = (id:string) => {
+    setEditAlias(editAlias.filter(aliasId => aliasId !== id));
+  }
   const columns: ColumnDef<BankAccountInfo>[] = [
     {
       header: "Alias",
@@ -16,20 +23,20 @@ export function BankAccountsTable({ selectedAccount }: { selectedAccount: BankAc
       cell: ({ row }) => {
         return (
           <div>
-            {getState("isEdit"+row.original.alias.id) ? (
+            {editAlias.includes(row.original.alias.id) ? (
               <div className="flex items-center">
                 <Input className="w-[160px] text-depa-gray-600 text-sm font-semibold leading-tight border border-gray-300 rounded p-1 mr-2" value={row.original.alias.name} />
-                <Button variant="ghost" onClick={() => toggleState("isEdit"+row.original.alias.id)}>
+                <Button variant="ghost" onClick={() => removeEditAlias(row.original.alias.id)}>
                   Save
                 </Button>
-                <Button variant="ghost" onClick={() => toggleState("isEdit"+row.original.alias.id)}>
+                <Button variant="ghost" onClick={() => removeEditAlias(row.original.alias.id)}>
                   Cancel
                 </Button>
               </div>
             ) : (
               <div>
                 {row.original.alias.name}
-                <Button variant="ghost" onClick={() => toggleState("isEdit"+row.original.alias.id)}>
+                <Button variant="ghost" onClick={() => addEditAlias(row.original.alias.id)}>
                   edit
                 </Button>
               </div>
