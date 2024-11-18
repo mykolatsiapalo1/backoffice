@@ -1,45 +1,28 @@
-import { Select } from "@/components/ui/select";
 import { SkDiv } from "@/components/ui/sk-div";
-import { BankAccount } from "@/app/(dashboard)/bank-accounts/constants";
-import { SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { SelectAccount } from "@/components/ui/select-account";
+import { Account } from "@/types/accounts";
+
 export function BankAccountsSelect({
   data,
   selectedAccount,
   setSelectedAccountId,
 }: {
-  data?: BankAccount[];
-  selectedAccount: BankAccount;
+  data?: Account[];
+  selectedAccount: Account;
   setSelectedAccountId: (id: string) => void;
 }) {
-
   return (
     <SkDiv isLoading={!data?.length}>
       <span className="mb-2 text-base font-normal leading-normal text-primary">Select account</span>
-      <div className="mt-2 mb-4 flex w-full items-center gap-2 text-base">
-        <Select onValueChange={(value) => setSelectedAccountId(value)}>
-          <SelectTrigger>
-            <SelectValue placeholder={<SelectItemRow {...selectedAccount} />} />
-          </SelectTrigger>
-          <SelectContent>
-            {data?.map((account) => (
-              <SelectItem value={account.id} key={account.id}>
-                <SelectItemRow {...account} />
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <div className="mb-4 mt-2 flex w-full items-center gap-2 text-base">
+        <SelectAccount
+          data={data || []}
+          selectedAccount={selectedAccount}
+          setSelectedAccountId={setSelectedAccountId}
+        />
         <Button>Create bank account</Button>
       </div>
     </SkDiv>
-  );
-}
-
-function SelectItemRow(account: BankAccount) {
-  return (
-    <div>
-      <span>{account.complete_name}</span>
-      <span className="text-gray-400"> - {account.identification_external_uuid}</span>
-    </div>
   );
 }

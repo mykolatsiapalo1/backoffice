@@ -1,11 +1,48 @@
+"use client";
+
+import { Pagination } from "@/services/accounts";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
+import { InfoSign } from "@/components/ui/info-sign";
 import { SkDiv } from "@/components/ui/sk-div";
 import { Account } from "@/types/accounts";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
+import { useState } from "react";
 
-export function DashboardAccountsTable({ data }: { data?: Account[] }) {
+const filters = [
+  {
+    label: "Approved",
+    value: "approved",
+  },
+  {
+    label: "Initiated",
+    value: "initiated",
+  },
+  {
+    label: "Retry",
+    value: "retry",
+  },
+  {
+    label: "Failed",
+    value: "failed",
+  },
+];
+
+export function DashboardAccountsTable({
+  data,
+  pagination,
+  getNewAccounts,
+}: {
+  data?: Account[];
+  pagination: Pagination;
+  getNewAccounts: (status_verification: string, current_page: number, per_page: number) => void;
+}) {
+  const [filter, setFilter] = useState("");
+  function setCurrentFilter(filter: string) {
+    setFilter(filter);
+    getNewAccounts(filter, 1, pagination.per_page);
+  }
   const columns: ColumnDef<Account>[] = [
     {
       header: "User",
@@ -21,7 +58,7 @@ export function DashboardAccountsTable({ data }: { data?: Account[] }) {
     },
     {
       header: "Status",
-      accessorKey: "status",
+      accessorKey: "status_verification",
     },
     {
       header: "Referral",
@@ -61,16 +98,22 @@ export function DashboardAccountsTable({ data }: { data?: Account[] }) {
 
   return (
     <SkDiv isLoading={!data?.length}>
+      <InfoSign>
+        <InfoSign.Sign>Accounts</InfoSign.Sign>
+        <InfoSign.Filter filters={filters} selectFilter={(filter) => setCurrentFilter(filter)}>
+          Status
+        </InfoSign.Filter>
+      </InfoSign>
       <DataTable
         columns={columns}
         data={data || []}
-        currPage={1}
-        totalCount={data?.length || 0}
-        limit={10}
-        getPrevPage={() => {}}
-        getNextPage={() => {}}
-        isPrevPageDisabled={false}
-        isNextPageDisabled={false}
+        currPage={pagination.current_page}
+        totalCount={pagination.total_count}
+        limit={pagination.per_page}
+        getPrevPage={() => getNewAccounts(filter, pagination.current_page - 1, pagination.per_page)}
+        getNextPage={() => getNewAccounts(filter, pagination.current_page + 1, pagination.per_page)}
+        isPrevPageDisabled={pagination.current_page <= 1}
+        isNextPageDisabled={pagination.current_page >= pagination.total_pages}
       />
     </SkDiv>
   );

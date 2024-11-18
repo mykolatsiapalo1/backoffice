@@ -27,6 +27,7 @@ export const mockAccountsData: BankAccount[] = [
     status_verification: "verified",
     complete_name: "John Doe",
     identification_external_uuid: "uuid-1",
+    identification_uuid: "uuid-1",
     bankAccountsList: [
       {
         alias: {
@@ -52,6 +53,7 @@ export const mockAccountsData: BankAccount[] = [
     status_verification: "pending",
     complete_name: "Jane Smith",
     identification_external_uuid: "uuid-2",
+    identification_uuid: "uuid-2",
     bankAccountsList: [
       {
         alias: {
@@ -77,6 +79,7 @@ export const mockAccountsData: BankAccount[] = [
     status_verification: "verified",
     complete_name: "Alice Johnson",
     identification_external_uuid: "uuid-3",
+    identification_uuid: "uuid-3",
     bankAccountsList: [
       {
         alias: {

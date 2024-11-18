@@ -9,4 +9,5 @@ export interface Account {
   status_verification: string;
   complete_name: string;
   identification_external_uuid: string;
+  identification_uuid: string;
 }

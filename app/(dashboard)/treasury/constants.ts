@@ -27,6 +27,7 @@ export const mockAccountsData: TreasuryAccount[] = [
     status_verification: "verified",
     complete_name: "John Doe",
     identification_external_uuid: "uuid-1",
+    identification_uuid: "uuid-1",
     activities: [
       {
         pair: "BTC/USD",
@@ -57,6 +58,7 @@ export const mockAccountsData: TreasuryAccount[] = [
     status_verification: "pending",
     complete_name: "Jane Smith",
     identification_external_uuid: "uuid-2",
+    identification_uuid: "uuid-2",
     activities: [],
     otherBalance: { currency: "USD", value: 500 },
   },
@@ -70,6 +72,7 @@ export const mockAccountsData: TreasuryAccount[] = [
     status_verification: "verified",
     complete_name: "Alice Johnson",
     identification_external_uuid: "uuid-3",
+    identification_uuid: "uuid-3",
     activities: [
       {
         pair: "BTC/USD",
