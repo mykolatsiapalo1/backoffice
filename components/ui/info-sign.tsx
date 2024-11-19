@@ -12,7 +12,10 @@ export interface InfoSignProps extends React.HTMLAttributes<HTMLDivElement> {}
 const InfoSignContainer = React.forwardRef<HTMLDivElement, InfoSignProps>(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex h-16 items-center justify-between overflow-hidden rounded-xl border bg-gray-50 p-4", className)}
+    className={cn(
+      "dark:text-gray-450 flex h-16 items-center justify-between overflow-hidden rounded-xl border bg-gray-50 p-4 dark:bg-[#1A1A1A80]/50 [&_tr]:border-b",
+      className,
+    )}
     {...props}
   >
     {children}
